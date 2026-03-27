@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khan Web Service | AI Healthcare Solutions</title>
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- KWS Navbar -->
+    <nav class="kws-navbar">
+        <div class="nav-brand">
+            <span class="kws-logo"><i class="fas fa-globe"></i> KWS</span>
+            <span class="nav-title">Health &amp; Life Sciences</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">Capabilities</a>
+            <a href="#">Solutions</a>
+            <a href="#">Testimonials</a>
+            <a href="#">Research</a>
+        </div>
+        <div class="nav-actions">
+            <!-- Settings mapped to the configuration modal -->
+            <button class="nav-link-btn" id="settingsBtn">
+                <i class="fas fa-stethoscope"></i> API Config
+            </button>
+            <button class="nav-primary">Join KWS Network</button>
+        </div>
+    </nav>
+
+    <!-- Health-Themed Hero Section with Full Background -->
+    <header class="kws-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-label">ENTERPRISE MEDICAL AI</div>
+                <h1 class="hero-title">Empowering the Future of Global Healthcare</h1>
+                <p class="hero-desc">Khan Web Service (KWS) provides robust, secure, and advanced Vision and Natural
+                    Language models to automate clinical tasks, accelerate medical research, and enhance patient care
+                    globally.</p>
+                <div class="hero-buttons">
+                    <button class="btn-accent">Deploy Foundation Model</button>
+                    <button class="btn-outline">View Clinical Trials</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- KWS Console Area (The App) -->
+    <section class="kws-section">
+        <div class="section-header">
+            <h2>KWS Medical Assistant </h2>
+            <p>Experience the power of our multimodal diagnostic and conversation agents in a secure sandbox.</p>
+        </div>
+
+        <div class="console-box">
+            <div class="console-header">
+                <div class="console-tabs">
+                    <div class="tab active-tab"><i class="fas fa-comments"></i> Neural Chat Interaction</div>
+                    <div class="tab"><i class="fas fa-x-ray"></i> Vision Diagnostics</div>
+                </div>
+                <div class="console-status">
+                    <span class="status-dot"></span> Secure Encrypted Session
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <main class="chat-area" id="chatArea">
+                <div class="message ai-msg fade-in">
+                    <div class="msg-avatar"><i class="fas fa-hospital-user"></i></div>
+                    <div class="msg-bubble">
+                        <p><strong>Welcome to the Khan Web Service (KWS) Health Chatbotong></p>
+                        <p>I am your enterprise diagnostic assistant. I am equipped to analyze unstructured clinical
+                            text, summarize symptoms, and parse visual data such as X-rays, MRI scans, or medical
+                            charts.</p>
+                        <p class="disclaimer"><em>Disclaimer: This application is a strictly non-medical AI
+                                demonstration deployed on KWS. Do not input real PII/PHI. Generated insights must not be
+                                used for actual medical diagnosis.</em></p>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Image Attachment Preview -->
+            <div class="media-preview hidden" id="mediaPreview">
+                <div class="preview-box">
+                    <img id="previewImg" src="" alt="Attachment">
+                    <button class="remove-btn" id="removeImgBtn" title="Remove attachment"><i
+                            class="fas fa-times"></i></button>
+                </div>
+            </div>
+
+            <!-- Inputs -->
+            <footer class="console-footer">
+                <div class="input-wrapper">
+                    <input type="file" id="fileInput" accept="image/png, image/jpeg, image/webp" hidden>
+                    <button class="attach-btn icon-btn" id="attachBtn" title="Upload an Image or Scan">
+                        <i class="fas fa-file-medical"></i>
+                    </button>
+                    <textarea id="promptInput" rows="1"
+                        placeholder="Describe symptoms or upload visual data for inference..."></textarea>
+                    <button class="send-btn" id="sendBtn" title="Run Inference">
+                        Run Inference
+                    </button>
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="kws-footer">
+        <p>&copy; 2026, Khan Web Service (KWS), Inc. Accelerating Medical Technology.</p>
+    </footer>
+
+    <!-- Credentials Modal -->
+    <div class="modal-overlay hidden" id="credModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Configure Backend Connection</h2>
+                <button class="icon-btn close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="helper-text">Map your backend endpoint keys to enable inference in this KWS playground
+                    session. Credentials are securely encrypted in your local browser cache.</p>
+
+                <div class="input-group">
+                    <label>Endpoint URL</label>
+                    <input type="text" id="azureEndpoint" placeholder="https://<resource>.openai.azure.com/">
+                </div>
+                <div class="input-group">
+                    <label>API Key</label>
+                    <input type="password" id="azureKey" placeholder="32-character hex key">
+                </div>
+                <div class="input-group">
+                    <label>Deployment Name</label>
+                    <input type="text" id="azureDeployment" placeholder="e.g., gpt-4o">
+                </div>
+                <div class="input-group">
+                    <label>API Version</label>
+                    <input type="text" id="azureApiVer" value="2024-02-15-preview"
+                        placeholder="e.g., 2024-02-15-preview">
+                </div>
+
+                <div id="modalError" class="error-msg hidden"></div>
+
+                <div class="modal-actions">
+                    <button class="btn-accent save-btn" id="saveCredsBtn">Secure &amp; Save Configuration</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="text.js"></script>
+</body>
+
+</html>
