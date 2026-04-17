@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure AI Sentinel | Cyber Intelligence Console</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Background Decor -->
+    <div class="glow-sphere sphere-1"></div>
+    <div class="glow-sphere sphere-2"></div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon"></div>
+                <h1>AI SENTINEL</h1>
+                <p class="tagline">Cloud Security & Extraction</p>
+            </div>
+
+            <div class="config-section">
+                <h3><svg class="icon-s" viewBox="0 0 24 24"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd"/></svg> Azure Gateways</h3>
+                <div class="input-group">
+                    <input type="password" id="docKey" placeholder="Document Intelligence Key">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="docEndpoint" placeholder="Resource Endpoint URL">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="safetyKey" placeholder="Content Safety Key">
+                </div>
+            </div>
+
+            <div class="session-tracker">
+                <h3>Temporal Logs</h3>
+                <div id="sessionLog" class="log-container">
+                    <p class="empty-hint">Standby for data ingestion...</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="dashboard">
+            <header class="top-bar">
+                <div class="system-tag">
+                    <span class="status-pulse"></span>
+                    CORE ANALYTICS ENGAGED
+                </div>
+                <div class="actions">
+                    <button id="simBtn" class="btn-neo">RUN SIMULATION</button>
+                </div>
+                <div class="metrics">
+                    <span class="metric-item">LATENCY: <span id="latency">0ms</span></span>
+                    <span class="metric-item">ADAPTIVE MODE: <span class="badge-v">ACTIVE</span></span>
+                </div>
+            </header>
+
+            <section class="ingestion-zone">
+                <div id="dropZone" class="drop-zone">
+                    <div class="drop-ui">
+                        <div class="drop-circle">
+                            <svg class="icon-l" viewBox="0 0 24 24"><path d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"/></svg>
+                        </div>
+                        <p class="drop-text">UPLOAD HETEROGENEOUS SOURCE</p>
+                        <span class="drop-subtext">PDF, PNG, JPEG SUPPORTED</span>
+                        <input type="file" id="fileInput" hidden accept=".pdf,image/*">
+                    </div>
+                </div>
+            </section>
+
+            <section class="results-grid triple-col">
+                <!-- COLUMN 1: File Extraction -->
+                <div class="panel col-panel">
+                    <div class="panel-header">
+                        <h2>1. SOURCE EXTRACTION</h2>
+                        <span id="extractionConfidence" class="pill-glow">0.0%</span>
+                    </div>
+                    <div class="panel-body">
+                        <pre id="extractedText" class="code-view">NIL_BUFFER</pre>
+                    </div>
+                </div>
+
+                <!-- COLUMN 2: Risk Analysis Intelligence -->
+                <div class="panel col-panel risk-panel">
+                    <div class="panel-header">
+                        <h2>2. RISK INTELLIGENCE</h2>
+                        <span id="riskLevel" class="risk-pill low">SECURE</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="chart-wrapper">
+                            <canvas id="riskChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN 3: Policy Explainability -->
+                <div class="panel col-panel">
+                    <div class="panel-header">
+                        <h2>3. POLICY COMPLIANCE</h2>
+                    </div>
+                    <div id="anomalyList" class="anomaly-stack">
+                        <p class="placeholder-text">NO ANOMALIES DETECTED</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Status HUD -->
+            <div id="progressBar" class="hud-notify hidden">
+                <div class="hud-content">
+                    <span id="progressText">INITIALIZING...</span>
+                    <div class="pixel-progress">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

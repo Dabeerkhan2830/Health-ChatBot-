@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Intelligence Engine | Azure Cloud Services</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <!-- Dynamic Background -->
+    <div class="bg-blur-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- HEADER -->
+        <header class="main-header">
+            <div class="brand">
+                <div class="brand-logo">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Cloud<span>Intel</span></h1>
+                    <p>Azure AI Language Service</p>
+                </div>
+            </div>
+            <div class="status-badge" id="service-status">
+                <span class="status-dot pulse"></span>
+                <span class="status-text">Azure API Connected</span>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="intelligence-grid">
+            
+            <!-- LEFT COLUMN: INPUT -->
+            <section class="control-panel">
+                <div class="glass-card input-card">
+                    <div class="card-header">
+                        <i class="fas fa-pen-fancy"></i>
+                        <h3>Content Analysis</h3>
+                    </div>
+                    <div class="input-wrapper">
+                        <textarea id="ai-input" placeholder="Enter product description, article, or text to extract deep insights..."></textarea>
+                        <div class="input-stats">
+                            <span id="char-total">0 / 5000 chars</span>
+                        </div>
+                    </div>
+                    <div class="action-footer">
+                        <div class="tool-settings">
+                            <button class="settings-trigger" title="API Configuration">
+                                <i class="fas fa-sliders"></i>
+                            </button>
+                        </div>
+                        <button id="analyze-trigger" class="glow-button">
+                            <span class="btn-content">
+                                <i class="fas fa-sparkles"></i>
+                                <span>Run Intelligence</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- LOADING INDICATOR -->
+                <div id="loader" class="loader-overlay hidden">
+                    <div class="ai-orb">
+                        <div class="orb-core"></div>
+                        <div class="orb-ring"></div>
+                    </div>
+                    <p>Processing Neural Insights...</p>
+                </div>
+            </section>
+
+            <!-- RIGHT COLUMN: RESULTS -->
+            <section class="insights-display">
+                <div id="welcome-message" class="info-empty">
+                    <i class="fas fa-brain fa-3x"></i>
+                    <h2>Ready for Analysis</h2>
+                    <p>Paste your content and click 'Run Intelligence' to see Azure AI in action.</p>
+                </div>
+
+                <div id="results-container" class="results-layout hidden">
+                    <!-- LANGUAGE DETECTION CARD -->
+                    <div class="glass-card result-card animate-slide-in">
+                        <div class="card-title">
+                            <i class="fas fa-language"></i>
+                            <h4>Language Detection</h4>
+                        </div>
+                        <div class="lang-display">
+                            <h2 id="lang-name">-</h2>
+                            <div class="iso-badge" id="lang-iso">-</div>
+                        </div>
+                        <div class="confidence-level">
+                            <div class="level-info">
+                                <span>Confidence</span>
+                                <span id="lang-confidence">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="lang-bar" class="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ENTITIES CARD -->
+                    <div class="glass-card result-card animate-slide-in-delay1">
+                        <div class="card-title">
+                            <i class="fas fa-tags"></i>
+                            <h4>Named Entities</h4>
+                        </div>
+                        <div class="entities-wall" id="entities-list">
+                            <!-- Entities will be injected here -->
+                        </div>
+                    </div>
+
+                    <!-- SUMMARY CARD (Full Width) -->
+                    <div class="glass-card result-card full-span animate-slide-in-delay2">
+                        <div class="card-title">
+                            <i class="fas fa-align-left"></i>
+                            <h4>AI Insight Summary</h4>
+                        </div>
+                        <div class="summary-content" id="product-summary">
+                            <!-- Summary will be injected here -->
+                        </div>
+                        <div class="card-actions">
+                            <button id="copy-summary" class="mini-btn">
+                                <i class="far fa-copy"></i> Copy Insight
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SENTIMENT (Optional but completes the dashboard) -->
+                    <div class="glass-card result-card full-span animate-slide-in-delay3">
+                        <div class="card-title">
+                            <i class="fas fa-face-smile"></i>
+                            <h4>Contextual Sentiment</h4>
+                        </div>
+                        <div class="sentiment-viz" id="sentiment-viz">
+                            <div class="sentiment-vibe" id="vibe-text">-</div>
+                            <div class="sentiment-bars">
+                                <div class="s-bar pos"><div id="bar-pos" style="width: 0%"></div><span>Positive</span></div>
+                                <div class="s-bar neu"><div id="bar-neu" style="width: 0%"></div><span>Neutral</span></div>
+                                <div class="s-bar neg"><div id="bar-neg" style="width: 0%"></div><span>Negative</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="app-footer">
+            <p>&copy; 2026 Azure Cognitive Intelligence Dashboard</p>
+            <div class="footer-links">
+                <span>Powered by GPT-4o & Azure Language Services</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

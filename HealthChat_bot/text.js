@@ -31,6 +31,7 @@ const settingsBtn = document.getElementById('settingsBtn');
 const credModal = document.getElementById('credModal');
 const closeModalBtn = document.getElementById('closeModalBtn');
 const saveCredsBtn = document.getElementById('saveCredsBtn');
+const testCredsBtn = document.getElementById('testCredsBtn');
 const toast = document.getElementById('toast');
 
 // Modal Inputs
@@ -91,6 +92,61 @@ saveCredsBtn.addEventListener('click', () => {
     credModal.classList.add('hidden');
     showToast("Credentials successfully encrypted and saved in browser!");
 });
+
+// --- CONNECTION TESTER ---
+async function testConnection() {
+    const ep = epInput.value.trim();
+    const ky = keyInput.value.trim();
+    const dp = depInput.value.trim();
+    const vr = verInput.value.trim();
+
+    if (!ep || !ky || !dp) {
+        modalError.textContent = "Please fill in all fields to test.";
+        modalError.classList.remove('hidden');
+        return;
+    }
+
+    modalError.classList.add('hidden');
+    testCredsBtn.disabled = true;
+    testCredsBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+
+    try {
+        const url = `${ep.replace(/\/$/, '')}/openai/deployments/${dp}/chat/completions?api-version=${vr}`;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': ky
+            },
+            body: JSON.stringify({
+                messages: [{ role: "user", content: "Say hello" }],
+                max_tokens: 5
+            })
+        });
+
+        if (response.ok) {
+            modalError.innerHTML = '<span style="color: var(--accent-green)"><i class="fas fa-check-circle"></i> Connection Successful! You are ready.</span>';
+            modalError.classList.remove('hidden');
+        } else {
+            const errData = await response.json().catch(() => ({}));
+            let msg = errData.error?.message || `Error ${response.status}`;
+            
+            // Helpful hints for common errors
+            if (response.status === 401) msg = "Invalid API Key. Please check your key.";
+            if (response.status === 404) msg = "Wrong Endpoint or Deployment Name.";
+            
+            throw new Error(msg);
+        }
+    } catch (err) {
+        modalError.textContent = "❌ " + err.message;
+        modalError.classList.remove('hidden');
+    } finally {
+        testCredsBtn.disabled = false;
+        testCredsBtn.innerText = 'Test Connection';
+    }
+}
+
+testCredsBtn.addEventListener('click', testConnection);
 
 // --- UI HELPERS ---
 function showToast(msg) {

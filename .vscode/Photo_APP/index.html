@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionIQ | Smart Photo Management</title>
+    <!-- AI-Powered Captioning and Face Detection with Azure AI Vision -->
+    <meta name="description"
+        content="VisionIQ: Intelligent photo management with automated face detection and smart image captioning powered by Azure Computer Vision.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="user-info">
+                <div class="user-text">
+                    <p class="greeting">Hello, Dabeer</p>
+                    <h1 class="welcome">Smart Gallery</h1>
+                </div>
+                <img src="boy_pf.png" alt="User Avatar" class="avatar">
+            </div>
+
+            <div class="search-container" id="search-bar">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" placeholder="Search people, tags, or memories..." id="search-input">
+                <button class="filter-btn"><i class="fa-solid fa-sliders"></i></button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Action Section: Upload -->
+            <section class="upload-section">
+                <div class="section-header">
+                    <h2>Process New Photo</h2>
+                </div>
+                <div class="upload-card" id="drop-zone">
+                    <div class="upload-content">
+                        <div class="upload-icon-container">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <p class="upload-title">Drop your image here</p>
+                        <p class="upload-subtitle">or tap to select from files</p>
+                    </div>
+                    <input type="file" id="file-input" hidden accept="image/*">
+                </div>
+            </section>
+
+            <!-- Processing Result (Shown after upload) -->
+            <section class="result-section" id="result-section" style="display: none;">
+                <div class="section-header">
+                    <h2>Analysis Result</h2>
+                    <button class="close-result" id="close-result-btn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="image-preview-container">
+                    <div class="canvas-wrapper">
+                        <img id="preview-img" src="" alt="Preview">
+                        <canvas id="face-canvas"></canvas>
+                    </div>
+                    <div class="analysis-card">
+                        <div class="caption-tag">
+                            <i class="fa-solid fa-robot"></i>
+                            <span>AI INSIGHT</span>
+                        </div>
+                        <h3 id="image-caption">Analyzing image...</h3>
+                        <div class="tags-container" id="tags-chips">
+                            <!-- Tags will be dynamically added here -->
+                        </div>
+                        <div class="face-details" id="face-details">
+                            <!-- Face counts/details here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gallery Section -->
+            <section class="gallery-section">
+                <div class="section-header">
+                    <h2>Your Collection</h2>
+                    <a href="#" class="see-all">See all</a>
+                </div>
+                <div class="gallery-grid" id="gallery-grid">
+                    <!-- Gallery items will appear here -->
+                    <div class="empty-state">
+                        <i class="fa-solid fa-images"></i>
+                        <p>No photos processed yet</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" id="btn-home">
+                <i class="fa-solid fa-house"></i>
+            </button>
+            <button class="nav-item">
+                <i class="fa-solid fa-compass"></i>
+            </button>
+            <button class="nav-item">
+                <i class="fa-solid fa-heart"></i>
+            </button>
+            <button class="nav-item">
+                <i class="fa-solid fa-grip"></i>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Configuration Overlay (Shown if API keys missing) -->
+    <div id="config-overlay" class="overlay" style="display: none;">
+        <div class="modal">
+            <h2>Azure AI Setup</h2>
+            <p>Enter your Computer Vision credentials to enable AI features.</p>
+            <input type="text" id="api-key" placeholder="Azure API Key">
+            <input type="text" id="api-endpoint"
+                placeholder="Endpoint (e.g., https://yourname.cognitiveservices.azure.com/)">
+            <button id="save-config">Start Exploring</button>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

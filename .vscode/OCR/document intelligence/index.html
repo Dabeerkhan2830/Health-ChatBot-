@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure AI | Document Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="pulse-dot"></span>
+                <h1>DOC INTEL</h1>
+            </div>
+            <nav>
+                <div class="nav-group">
+                    <label>MODELS</label>
+                    <button class="nav-btn active" data-model="prebuilt-read">📄 Read (OCR)</button>
+                    <button class="nav-btn" data-model="prebuilt-layout">📊 Layout</button>
+                    <button class="nav-btn" data-model="prebuilt-invoice">🧾 Invoice</button>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="open-settings" class="btn-ghost">⚙️ API Settings</button>
+            </div>
+        </aside>
+
+        <main class="main-stage">
+            <header class="stage-header">
+                <div class="model-info">
+                    <h2 id="current-model-title">General Document Analysis</h2>
+                    <p id="model-desc">Extract text and handwriting using AI Document Intelligence.</p>
+                </div>
+                <div class="status-badge" id="conn-status">Disconnected</div>
+            </header>
+
+            <section class="workspace">
+                <div class="drop-card glass" id="drop-zone">
+                    <input type="file" id="file-picker" hidden accept=".pdf,.png,.jpg,.jpeg">
+                    <div class="drop-content">
+                        <div class="icon-circle">📂</div>
+                        <h3>Upload Document</h3>
+                        <p>Drag & drop or <span class="link">click to browse</span></p>
+                    </div>
+                    <div class="preview-stage hidden" id="preview-stage">
+                        <img id="doc-preview" src="" alt="Preview">
+                        <button id="clear-file" class="btn-round">✕</button>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="analyze-btn" class="btn-primary" disabled>Run Analysis</button>
+                </div>
+
+                <div class="results-grid">
+                    <div class="card glass">
+                        <div class="card-title">Extracted Text Content</div>
+                        <div class="scroll-box" id="content-box">
+                            <div class="empty-msg">Results will appear here...</div>
+                        </div>
+                    </div>
+                    <div class="card glass">
+                        <div class="card-title">Page Metadata (JSON)</div>
+                        <div class="scroll-box" id="meta-box">
+                            <pre class="json-viewer">{}</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay hidden" id="modal">
+        <div class="modal glass">
+            <h3>Azure Configuration</h3>
+            <div class="input-field">
+                <label>Endpoint URL</label>
+                <input type="text" id="endpoint" placeholder="https://your-resource.cognitiveservices.azure.com/">
+            </div>
+            <div class="input-field">
+                <label>API Key</label>
+                <input type="password" id="api-key" placeholder="32-character key">
+            </div>
+            <div class="modal-actions">
+                <button id="save-cfg" class="btn-primary">Connect</button>
+                <button id="close-modal" class="btn-ghost">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

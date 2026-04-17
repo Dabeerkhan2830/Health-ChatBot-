@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Detection | Azure Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <div class="dashboard-container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <span>AI Studio</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a href="#" class="nav-item"><i class="fas fa-language"></i> Detection</a>
+                <a href="#" class="nav-item"><i class="fas fa-tags"></i> Entities</a>
+                <a href="#" class="nav-item"><i class="fas fa-align-left"></i> Summarization</a>
+                <a href="#" class="nav-item"><i class="fas fa-smile"></i> Sentiment</a>
+                <div class="nav-divider"></div>
+                <a href="#" class="nav-item"><i class="fas fa-history"></i> History</a>
+                <a href="#" class="nav-item"><i class="fas fa-cog"></i> Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=AI+User&background=6366f1&color=fff" alt="User">
+                    <div>
+                        <p class="user-name">Premium User</p>
+                        <p class="user-plan">Pro Plan</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOP NAVBAR -->
+            <header class="navbar">
+                <div class="nav-left">
+                    <h2>Language Analysis <span class="badge-new">v2.0</span></h2>
+                </div>
+                <div class="nav-right">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search tasks...">
+                    </div>
+                    <button class="icon-btn"><i class="far fa-bell"></i></button>
+                    <button class="icon-btn"><i class="far fa-question-circle"></i></button>
+                </div>
+            </header>
+
+            <!-- WORKSPACE -->
+            <section class="workspace">
+                <div class="input-card glass">
+                    <div class="card-header">
+                        <label for="ai-input">Input Text</label>
+                        <div class="header-actions">
+                            <span id="word-count">0 words</span>
+                            <span id="char-count">0 / 5000</span>
+                        </div>
+                    </div>
+                    <textarea id="ai-input" placeholder="Paste your content here for advanced AI analysis..."></textarea>
+                    <div class="card-footer">
+                        <div class="action-buttons">
+                            <button id="analyze-btn" class="btn-primary">
+                                <i class="fas fa-sparkles"></i> Run Analysis
+                            </button>
+                            <button id="clear-btn" class="btn-secondary">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOADING OVERLAY -->
+                <div id="loader" class="loader-overlay hidden">
+                    <div class="spinner"></div>
+                    <p>Processing via Azure AI...</p>
+                </div>
+
+                <!-- RESULTS SECTION -->
+                <div id="results-area" class="results-grid hidden">
+                    <!-- Language Card -->
+                    <div class="result-card glass fade-up">
+                        <div class="res-header">
+                            <i class="fas fa-globe"></i>
+                            <h3>Language Detection</h3>
+                        </div>
+                        <div class="res-body">
+                            <div class="res-row">
+                                <span>Detected Language</span>
+                                <strong id="res-lang-name">-</strong>
+                            </div>
+                            <div class="res-row">
+                                <span>ISO Code</span>
+                                <code id="res-lang-code">-</strong>
+                            </div>
+                            <div class="confidence-container">
+                                <div class="label-group">
+                                    <span>Confidence</span>
+                                    <span id="res-lang-score">0%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div id="res-lang-bar" class="progress-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sentiment Card -->
+                    <div class="result-card glass fade-up" style="animation-delay: 0.1s;">
+                        <div class="res-header">
+                            <i class="fas fa-face-smile"></i>
+                            <h3>Sentiment Analysis</h3>
+                        </div>
+                        <div class="res-body">
+                            <div class="overall-sentiment-box">
+                                <span id="res-sentiment-label">Neutral</span>
+                            </div>
+                            <div class="sentiment-bars">
+                                <div class="bar-item">
+                                    <div class="bar-info"><span>Positive</span> <span id="val-pos">0%</span></div>
+                                    <div class="progress-track"><div id="bar-pos" class="progress-fill pos"></div></div>
+                                </div>
+                                <div class="bar-item">
+                                    <div class="bar-info"><span>Neutral</span> <span id="val-neu">0%</span></div>
+                                    <div class="progress-track"><div id="bar-neu" class="progress-fill neu"></div></div>
+                                </div>
+                                <div class="bar-item">
+                                    <div class="bar-info"><span>Negative</span> <span id="val-neg">0%</span></div>
+                                    <div class="progress-track"><div id="bar-neg" class="progress-fill neg"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Entity Card -->
+                    <div class="result-card glass fade-up" style="animation-delay: 0.2s;">
+                        <div class="res-header">
+                            <i class="fas fa-tags"></i>
+                            <h3>Named Entities</h3>
+                        </div>
+                        <div class="res-body">
+                            <div id="entities-container" class="entities-list">
+                                <p class="placeholder-text">Entities will appear here...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Card -->
+                    <div class="result-card glass fade-up" style="animation-delay: 0.3s; grid-column: span 2;">
+                        <div class="res-header">
+                            <i class="fas fa-align-left"></i>
+                            <h3>AI Summarization</h3>
+                        </div>
+                        <div class="res-body">
+                            <div id="res-summary" class="summary-box">
+                                <p class="placeholder-text">A concise AI-generated summary will appear here...</p>
+                            </div>
+                        </div>
+                        <div class="card-action-footer">
+                            <button id="copy-btn" class="btn-text"><i class="far fa-copy"></i> Copy Full Report</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="text.js"></script>
+</body>
+</html>
