@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Translator Pro | Intelligent AI Translation</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+</head>
+<body>
+
+    <!-- 3D Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+    <div class="neural-grid"></div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <div class="theme-option active" data-theme="azure" style="background: #6366f1;"></div>
+        <div class="theme-option" data-theme="emerald" style="background: #10b981;"></div>
+        <div class="theme-option" data-theme="rose" style="background: #f43f5e;"></div>
+    </div>
+
+    <div class="main-layout">
+        <div class="container" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000">
+            <div class="glow"></div>
+            <header>
+                <div class="ai-badge">AI Intelligence v2.5</div>
+                <h1>Azure Translator Pro</h1>
+                <p class="subtitle">Experience seamless multi-language translation powered by Azure AI Intelligence.</p>
+            </header>
+
+        <!-- Input Area -->
+        <div class="input-group">
+            <div class="label-row">
+                <span class="label">Source Text</span>
+                <button id="voiceBtn" class="voice-btn" onclick="startSpeechRecognition()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    <span>Listen</span>
+                </button>
+            </div>
+            <textarea id="inputText" placeholder="Enter text or speak..."></textarea>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div style="flex: 1;">
+                <span class="label">Target Language</span>
+                <select id="targetLang">
+                    <option value="hi">Hindi</option>
+                    <option value="en">English</option>
+                    <option value="fr">French</option>
+                    <option value="es">Spanish</option>
+                    <option value="de">German</option>
+                    <option value="it">Italian</option>
+                    <option value="ja">Japanese</option>
+                    <option value="ko">Korean</option>
+                    <option value="zh-Hans">Chinese (Simplified)</option>
+                </select>
+            </div>
+            <div style="align-self: flex-end;">
+                <button onclick="translateText()">
+                    <span>Translate</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m5 12 7-7 7 7"></path>
+                        <path d="M12 19V5"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Output Area -->
+        <div class="output-container">
+            <div class="output-header">
+                <span class="label">Translation Result</span>
+                <div class="output-actions">
+                    <button class="icon-btn" onclick="copyTranslation()" title="Copy to Clipboard">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                    <button class="icon-btn" onclick="speakTranslation()" title="Listen">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="outputText">Translated text will appear here...</div>
+        </div>
+        </div>
+
+        <!-- History Sidebar (3D) -->
+        <div class="history-panel">
+            <div class="label">Recent Translations</div>
+            <div id="historyList" class="history-list">
+                <div class="history-empty">No history yet</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
